@@ -1,0 +1,20 @@
+{
+  "name": "Sync Interview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^6.0.0",
+    "await-the": "^4.3.2",
+    "lodash": "^4.17.15",
+    "nedb": "^1.8.0",
+    "nedb-promises": "^6.0.3",
+    "node-schedule": "^2.1.0"
+  }
+}
