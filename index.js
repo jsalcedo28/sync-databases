@@ -61,7 +61,7 @@ const load = async () => {
 
   // Add some documents to the collection.
   // TODO: Maybe dynamically do this? `faker` might be a good library here.
-  await companies.forEach(async (company) => {
+  _.forEach(companies, async function (company) {
     await sourceDb.insert(company);
     await the.wait(300);
   });
@@ -207,15 +207,15 @@ const syncAllSafely = async (batchSize, countFromTargetDB, data) => {
 const syncNewChanges = async (data) => {
   console.log("Syncing databases with NEW changes, please wait...");
 
-  // console.log(data);
-  for (let i = 0; i < data.length; i++) {
-    let dataFromSourceDb = await sourceDb.find({ name: data[i] });
+  //look for record with changes on sourceDB and update changes on TargetDB
+  _.forEach(data, async function (companyName) {
+    let dataFromSourceDb = await sourceDb.find({ name: companyName });
     await targetDb
-      .update({ name: data[i] }, { $set: dataFromSourceDb[0] }, {})
+      .update({ name: companyName }, { $set: dataFromSourceDb[0] }, {})
       .then(() => {
         console.log(`Sychronize: [TargetDB] is up to date!`);
       });
-  }
+  });
 
   return true;
 };
@@ -259,11 +259,11 @@ const synchronize = async () => {
       }
     }
 
-    pendingChanges == 0
+    pendingChanges === 0
       ? console.log("Synchronize: Everything is up to date.")
       : console.log("Synchronize: [TargetDB] has some PENDING changes.");
 
-    if (pendingChanges == 1) {
+    if (pendingChanges === 1) {
       job.cancel();
       pendingChanges = 0;
       await syncNewChanges(idsToUpdate).then(() => {
