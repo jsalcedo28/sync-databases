@@ -4,4 +4,4 @@ This exercise (NodeJS) has you implement a synchronize() method that will copy a
 
 ## Project Demo
 
-🚀[View Demo](https://replit.com/@jsalcedo28/SyncInterview#index.js)
+🚀[View Demo](https://replit.com/@jsalcedo28/SyncDatabases#index.js)
